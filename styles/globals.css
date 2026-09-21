@@ -1,26 +1,32 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap");
 
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: notion --default;
+  themes: awney --default;
 }
 
 @plugin "daisyui/theme" {
-  name: "notion";
+  name: "awney";
   default: true;
-  color-scheme: dark;
-  --color-base-100: #0f0f0f;
-  --color-base-200: #141414;
-  --color-base-300: #1f1f1f;
-  --color-base-content: #e6e6e6;
-  --color-primary: #2382fc;
+  color-scheme: light;
+  --color-base-100: #f7f9fc;
+  --color-base-200: #ffffff;
+  --color-base-300: #e8edf4;
+  --color-base-content: #071a2f;
+  --color-primary: #146ef5;
   --color-primary-content: #ffffff;
-  --color-neutral: #1f1f1f;
-  --color-neutral-content: #e6e6e6;
-  --color-info: #5aa2ff;
-  --color-success: #32d583;
-  --color-warning: #f4b740;
-  --color-error: #ff6b6b;
+  --color-secondary: #071a2f;
+  --color-secondary-content: #ffffff;
+  --color-neutral: #0a1628;
+  --color-neutral-content: #ffffff;
+  --color-info: #146ef5;
+  --color-success: #12a47a;
+  --color-warning: #e9a23b;
+  --color-error: #df3f4f;
+  --radius-selector: 0.75rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1rem;
+  --border: 1px;
 }
 
 html,
@@ -28,16 +34,24 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: #0f0f0f;
-  color: #e6e6e6;
-  font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  background: #f7f9fc;
+  color: #071a2f;
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif;
   letter-spacing: -0.01em;
-  color-scheme: dark;
+  color-scheme: light;
+}
+
+.font-heading,
+h1,
+h2,
+h3 {
+  font-family: "Manrope", "DM Sans", system-ui, sans-serif;
+  letter-spacing: -0.035em;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+  scrollbar-color: rgba(7, 26, 47, 0.16) transparent;
 }
 
 ::-webkit-scrollbar {
@@ -50,16 +64,16 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(7, 26, 47, 0.14);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(7, 26, 47, 0.22);
 }
 
 ::selection {
-  background: rgba(35, 130, 252, 0.25);
+  background: rgba(20, 110, 245, 0.2);
 }
 
 a {
@@ -67,60 +81,101 @@ a {
   text-decoration: none;
 }
 
-/* Product tour (driver.js) — themed to match the "notion" dark palette.
-   driver.js renders its own DOM outside React, so these are plain hex overrides
-   of its own class names rather than DaisyUI/Tailwind classes. */
+button,
+.btn,
+.input,
+.select,
+.textarea {
+  font-family: "DM Sans", system-ui, sans-serif;
+}
+
+.btn-primary {
+  border-radius: 999px;
+  border-color: #146ef5;
+  box-shadow: 0 8px 20px rgba(20, 110, 245, 0.18);
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  border-color: #0b5bd7;
+  background: #0b5bd7;
+  box-shadow: 0 10px 24px rgba(20, 110, 245, 0.25);
+}
+
+.card,
+.modal-box {
+  border-color: rgba(7, 26, 47, 0.08);
+  box-shadow: 0 12px 32px rgba(7, 26, 47, 0.05);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: rgba(20, 110, 245, 0.65);
+  box-shadow: 0 0 0 3px rgba(20, 110, 245, 0.1);
+}
+
+/* Product tour — aligned with the Awney light palette. */
 .linki-tour-popover.driver-popover {
-  background: #141414;
-  border: 1px solid #1f1f1f;
-  border-radius: 12px;
-  color: #e6e6e6;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  background: #ffffff;
+  border: 1px solid #e8edf4;
+  border-radius: 16px;
+  color: #071a2f;
+  box-shadow: 0 18px 50px rgba(7, 26, 47, 0.16);
 }
+
 .linki-tour-popover .driver-popover-title {
-  color: #e6e6e6;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  color: #071a2f;
+  font-family: "Manrope", system-ui, sans-serif;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
 }
+
 .linki-tour-popover .driver-popover-description {
-  color: rgba(230, 230, 230, 0.7);
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  color: rgba(7, 26, 47, 0.68);
+  font-family: "DM Sans", system-ui, sans-serif;
   font-size: 13px;
   line-height: 1.5;
 }
+
 .linki-tour-popover .driver-popover-progress-text {
-  color: rgba(230, 230, 230, 0.3);
+  color: rgba(7, 26, 47, 0.4);
   font-size: 11px;
 }
+
 .linki-tour-popover .driver-popover-footer button {
-  background: #1f1f1f;
-  color: #e6e6e6;
+  background: #f7f9fc;
+  color: #071a2f;
   text-shadow: none;
-  border: 1px solid #1f1f1f;
-  border-radius: 8px;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  border: 1px solid #e8edf4;
+  border-radius: 999px;
+  font-family: "DM Sans", system-ui, sans-serif;
   font-size: 12px;
   padding: 6px 12px;
 }
+
 .linki-tour-popover .driver-popover-footer button:hover {
-  background: #2382fc;
-  border-color: #2382fc;
+  background: #146ef5;
+  border-color: #146ef5;
   color: #ffffff;
 }
+
 .linki-tour-popover .driver-popover-close-btn {
-  color: rgba(230, 230, 230, 0.4);
+  color: rgba(7, 26, 47, 0.4);
 }
+
 .linki-tour-popover .driver-popover-close-btn:hover {
-  color: #e6e6e6;
+  color: #071a2f;
 }
+
 .linki-tour-popover .driver-popover-arrow-side-left.driver-popover-arrow,
 .linki-tour-popover .driver-popover-arrow-side-right.driver-popover-arrow,
 .linki-tour-popover .driver-popover-arrow-side-top.driver-popover-arrow,
 .linki-tour-popover .driver-popover-arrow-side-bottom.driver-popover-arrow {
   border-color: transparent;
 }
-.driver-popover-arrow-side-left { border-left-color: #141414; }
-.driver-popover-arrow-side-right { border-right-color: #141414; }
-.driver-popover-arrow-side-top { border-top-color: #141414; }
-.driver-popover-arrow-side-bottom { border-bottom-color: #141414; }
+
+.driver-popover-arrow-side-left { border-left-color: #ffffff; }
+.driver-popover-arrow-side-right { border-right-color: #ffffff; }
+.driver-popover-arrow-side-top { border-top-color: #ffffff; }
+.driver-popover-arrow-side-bottom { border-bottom-color: #ffffff; }

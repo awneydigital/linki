@@ -175,7 +175,7 @@ export default function SettingsPage({
   return (
     <>
       <Head>
-        <title>Settings — Linki</title>
+        <title>Settings — Awney Growth OS</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 

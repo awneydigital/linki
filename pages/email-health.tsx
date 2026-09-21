@@ -64,7 +64,7 @@ export default function EmailHealth() {
 
   return (
     <>
-      <Head><title>Email Health — Linki</title></Head>
+      <Head><title>Email Health — Awney Growth OS</title></Head>
       <div className="p-8 max-w-7xl">
 
         {/* Header */}

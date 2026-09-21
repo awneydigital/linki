@@ -430,7 +430,7 @@ export default function InboxPage() {
   return (
     <>
       <Head>
-        <title>Inbox — Linki</title>
+        <title>Inbox — Awney Growth OS</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 

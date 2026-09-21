@@ -437,7 +437,7 @@ export default function ListDetailPage({
   return (
     <>
     <Head>
-      <title>{initialList.name} — Lists — Linki</title>
+      <title>{initialList.name} — Lists — Awney Growth OS</title>
       <meta name="robots" content="noindex, nofollow" />
     </Head>
     <div>

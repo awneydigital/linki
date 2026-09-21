@@ -38,7 +38,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       <AuthGuard>
         <Layout>
           <Component {...pageProps} />
-          <Toaster theme="dark" position="bottom-right" />
+          <Toaster theme="light" position="bottom-right" richColors />
         </Layout>
       </AuthGuard>
     </SessionProvider>

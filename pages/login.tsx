@@ -1,16 +1,15 @@
 import Head from "next/head";
-import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { RiLockPasswordLine, RiMailLine, RiKeyLine } from "react-icons/ri";
+import { RiArrowRightLine, RiKeyLine, RiLockPasswordLine, RiMailLine } from "react-icons/ri";
+import AwneyLogo from "@/components/brand/AwneyLogo";
 
 type Mode = "signin" | "signup";
 
 export default function LoginPage() {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("signin");
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [inviteCode, setInviteCode] = useState("");
@@ -30,11 +29,8 @@ export default function LoginPage() {
     const res = await signIn("credentials", { email, password, redirect: false });
     setLoading(false);
 
-    if (res?.ok) {
-      router.replace("/");
-    } else {
-      setError("Incorrect email or password.");
-    }
+    if (res?.ok) router.replace("/");
+    else setError("Incorrect email or password.");
   }
 
   async function handleSignUp(e: React.FormEvent) {
@@ -55,13 +51,11 @@ export default function LoginPage() {
       return;
     }
 
-    // Auto sign in after signup
     const signInRes = await signIn("credentials", { email, password, redirect: false });
     setLoading(false);
 
-    if (signInRes?.ok) {
-      router.replace("/");
-    } else {
+    if (signInRes?.ok) router.replace("/");
+    else {
       setError("Account created but sign-in failed. Try signing in manually.");
       switchMode("signin");
     }
@@ -69,119 +63,151 @@ export default function LoginPage() {
 
   return (
     <>
-    <Head>
-      <title>Sign in — Linki</title>
-      <meta name="robots" content="noindex, nofollow" />
-    </Head>
-    <div className="min-h-screen bg-base-100 flex items-center justify-center">
-      <div className="w-full max-w-sm">
-        {/* Logo */}
-        <div className="flex flex-col items-center gap-3 mb-8">
-          <Image src="/logo_linki.png" alt="Linki" width={40} height={40} className="rounded-xl" />
-          <div className="text-center">
-            <h1 className="text-base-content font-semibold text-lg">Linki</h1>
-            <p className="text-base-content/50 text-sm">
-              {mode === "signin" ? "Sign in to continue" : "Create your account"}
+      <Head>
+        <title>Sign in — Awney Growth OS</title>
+        <meta name="description" content="Awney Growth OS — acquisition and conversion in one workspace." />
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
+
+      <main className="relative min-h-screen overflow-hidden bg-[#071a2f] lg:grid lg:grid-cols-[1.12fr_0.88fr]">
+        <section className="relative hidden min-h-screen overflow-hidden p-12 text-white lg:flex lg:flex-col lg:justify-between xl:p-16">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(20,110,245,0.42),transparent_35%),radial-gradient(circle_at_80%_80%,rgba(20,110,245,0.16),transparent_30%)]" />
+          <div className="absolute -bottom-36 -right-28 h-96 w-96 rounded-full border border-white/10" />
+          <div className="absolute -bottom-20 -right-10 h-64 w-64 rounded-full border border-white/10" />
+
+          <AwneyLogo inverse className="relative z-10" />
+
+          <div className="relative z-10 max-w-xl">
+            <span className="mb-6 inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-bold tracking-[0.16em] text-white/70 backdrop-blur">
+              ACQUISITION + CONVERSION
+            </span>
+            <h1 className="text-5xl font-extrabold leading-[1.06] tracking-[-0.055em] text-white xl:text-6xl">
+              Turn outreach into a growth system.
+            </h1>
+            <p className="mt-6 max-w-lg text-lg leading-relaxed text-white/62">
+              Manage prospects, campaigns and conversations from one focused workspace built for the Awney team.
             </p>
           </div>
-        </div>
 
-        {/* Tab toggle */}
-        <div className="flex bg-base-300/50 rounded-lg p-1 mb-4">
-          <button
-            type="button"
-            onClick={() => switchMode("signin")}
-            className={`flex-1 py-1.5 text-sm rounded-md transition-colors font-medium ${
-              mode === "signin"
-                ? "bg-base-200 text-base-content shadow-sm"
-                : "text-base-content/40 hover:text-base-content/70"
-            }`}
-          >
-            Sign in
-          </button>
-          <button
-            type="button"
-            onClick={() => switchMode("signup")}
-            className={`flex-1 py-1.5 text-sm rounded-md transition-colors font-medium ${
-              mode === "signup"
-                ? "bg-base-200 text-base-content shadow-sm"
-                : "text-base-content/40 hover:text-base-content/70"
-            }`}
-          >
-            Sign up
-          </button>
-        </div>
+          <p className="relative z-10 text-xs font-medium tracking-wide text-white/35">
+            AWNEY DIGITAL · GROWTH OS
+          </p>
+        </section>
 
-        {/* Form */}
-        <form
-          onSubmit={mode === "signin" ? handleSignIn : handleSignUp}
-          className="bg-base-200 border border-base-300/40 rounded-xl p-6 flex flex-col gap-4"
-        >
-          {/* Email */}
-          <div className="flex flex-col gap-1.5">
-            <label className="text-xs text-base-content/50 font-medium uppercase tracking-wider">Email</label>
-            <div className="relative">
-              <RiMailLine size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-base-content/30" />
-              <input
-                type="email"
-                className="input input-sm w-full pl-8 bg-base-300 border-base-300/50 focus:outline-none focus:border-primary/50"
-                placeholder="you@example.com"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                autoFocus
-                required
-              />
+        <section className="relative flex min-h-screen items-center justify-center bg-[#f7f9fc] px-6 py-12 sm:px-10">
+          <div className="absolute left-0 top-0 h-1 w-full bg-primary lg:hidden" />
+          <div className="w-full max-w-md">
+            <AwneyLogo className="mb-12 lg:hidden" />
+
+            <div className="mb-8">
+              <span className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
+                {mode === "signin" ? "Welcome back" : "Join the workspace"}
+              </span>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-[-0.045em] text-base-content">
+                {mode === "signin" ? "Sign in to Awney" : "Create your account"}
+              </h2>
+              <p className="mt-2 text-sm text-base-content/55">
+                {mode === "signin"
+                  ? "Access your campaigns and conversations."
+                  : "Use the invitation code provided by your administrator."}
+              </p>
             </div>
-          </div>
 
-          {/* Password */}
-          <div className="flex flex-col gap-1.5">
-            <label className="text-xs text-base-content/50 font-medium uppercase tracking-wider">Password</label>
-            <div className="relative">
-              <RiLockPasswordLine size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-base-content/30" />
-              <input
-                type="password"
-                className="input input-sm w-full pl-8 bg-base-300 border-base-300/50 focus:outline-none focus:border-primary/50"
-                placeholder={mode === "signup" ? "Min. 8 characters" : "Your password"}
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                required
-              />
+            <div className="mb-5 flex rounded-full border border-base-300 bg-white p-1 shadow-[0_6px_24px_rgba(7,26,47,0.05)]">
+              {(["signin", "signup"] as Mode[]).map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() => switchMode(item)}
+                  className={`flex-1 rounded-full py-2 text-sm font-semibold transition-all ${
+                    mode === item
+                      ? "bg-[#071a2f] text-white shadow-sm"
+                      : "text-base-content/45 hover:text-base-content"
+                  }`}
+                >
+                  {item === "signin" ? "Sign in" : "Sign up"}
+                </button>
+              ))}
             </div>
-          </div>
 
-          {/* Invite code — signup only */}
-          {mode === "signup" && (
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-base-content/50 font-medium uppercase tracking-wider">Invite code</label>
-              <div className="relative">
-                <RiKeyLine size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-base-content/30" />
+            <form
+              onSubmit={mode === "signin" ? handleSignIn : handleSignUp}
+              className="flex flex-col gap-5 rounded-3xl border border-base-300/90 bg-white p-7 shadow-[0_20px_60px_rgba(7,26,47,0.08)] sm:p-8"
+            >
+              <Field label="Email" icon={<RiMailLine size={17} />}>
                 <input
-                  type="password"
-                  className="input input-sm w-full pl-8 bg-base-300 border-base-300/50 focus:outline-none focus:border-primary/50"
-                  placeholder="Ask your admin for the invite code"
-                  value={inviteCode}
-                  onChange={e => setInviteCode(e.target.value)}
+                  type="email"
+                  className="input h-12 w-full border-base-300 bg-base-100 pl-10 focus:outline-none"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoFocus
                   required
                 />
-              </div>
-            </div>
-          )}
+              </Field>
 
-          {error && <p className="text-xs text-error">{error}</p>}
+              <Field label="Password" icon={<RiLockPasswordLine size={17} />}>
+                <input
+                  type="password"
+                  className="input h-12 w-full border-base-300 bg-base-100 pl-10 focus:outline-none"
+                  placeholder={mode === "signup" ? "Min. 8 characters" : "Your password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </Field>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="btn btn-primary btn-sm w-full"
-          >
-            {loading
-              ? <span className="loading loading-spinner loading-xs" />
-              : mode === "signin" ? "Sign in" : "Create account"}
-          </button>
-        </form>
-      </div>
-    </div>
+              {mode === "signup" && (
+                <Field label="Invite code" icon={<RiKeyLine size={17} />}>
+                  <input
+                    type="password"
+                    className="input h-12 w-full border-base-300 bg-base-100 pl-10 focus:outline-none"
+                    placeholder="Provided by your administrator"
+                    value={inviteCode}
+                    onChange={(e) => setInviteCode(e.target.value)}
+                    required
+                  />
+                </Field>
+              )}
+
+              {error && (
+                <p role="alert" className="rounded-xl border border-error/15 bg-error/5 px-3.5 py-3 text-xs font-medium text-error">
+                  {error}
+                </p>
+              )}
+
+              <button type="submit" disabled={loading} className="btn btn-primary mt-1 h-12 w-full">
+                {loading ? (
+                  <span className="loading loading-spinner loading-xs" />
+                ) : (
+                  <span className="flex items-center gap-2">
+                    {mode === "signin" ? "Enter workspace" : "Create account"}
+                    <RiArrowRightLine size={16} />
+                  </span>
+                )}
+              </button>
+            </form>
+
+            <p className="mt-6 text-center text-xs text-base-content/35">
+              Awney Growth OS · Secure team access
+            </p>
+          </div>
+        </section>
+      </main>
     </>
+  );
+}
+
+function Field({ label, icon, children }: { label: string; icon: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <label className="flex flex-col gap-2">
+      <span className="text-xs font-bold uppercase tracking-[0.12em] text-base-content/45">{label}</span>
+      <span className="relative">
+        <span className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-base-content/30">
+          {icon}
+        </span>
+        {children}
+      </span>
+    </label>
   );
 }

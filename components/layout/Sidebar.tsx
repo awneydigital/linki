@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
@@ -20,17 +19,18 @@ import {
   RiPlayCircleLine,
 } from "react-icons/ri";
 import { pathToTourPage, replayPageTour } from "@/lib/tour";
+import AwneyLogo from "@/components/brand/AwneyLogo";
 
 const LEARNING_PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLBf6xNJOmsIQ";
 
 const mainNav = [
-  { href: "/", label: "Dashboard", icon: RiLayoutGridLine, color: "#5aa2ff", tour: "nav-dashboard" },
-  { href: "/lists", label: "Lists", icon: RiFileList3Line, color: "#32d583", tour: "nav-lists" },
-  { href: "/contacts", label: "Contacts", icon: RiContactsLine, color: "#34d399", tour: "nav-contacts" },
-  { href: "/companies", label: "Companies", icon: RiBuildingLine, color: "#a78bfa", tour: "nav-companies" },
-  { href: "/workflows", label: "Campaigns", icon: RiFlowChart, color: "#f4b740", tour: "nav-workflows" },
-  { href: "/inbox", label: "Inbox", icon: RiInboxLine, color: "#38bdf8", tour: "nav-inbox" },
-  { href: "/email-health", label: "Email Health", icon: RiMailCheckLine, color: "#f4b740", tour: "nav-email-health" },
+  { href: "/", label: "Dashboard", icon: RiLayoutGridLine, color: "#146ef5", tour: "nav-dashboard" },
+  { href: "/lists", label: "Lists", icon: RiFileList3Line, color: "#146ef5", tour: "nav-lists" },
+  { href: "/contacts", label: "Contacts", icon: RiContactsLine, color: "#146ef5", tour: "nav-contacts" },
+  { href: "/companies", label: "Companies", icon: RiBuildingLine, color: "#146ef5", tour: "nav-companies" },
+  { href: "/workflows", label: "Campaigns", icon: RiFlowChart, color: "#146ef5", tour: "nav-workflows" },
+  { href: "/inbox", label: "Inbox", icon: RiInboxLine, color: "#146ef5", tour: "nav-inbox" },
+  { href: "/email-health", label: "Email Health", icon: RiMailCheckLine, color: "#146ef5", tour: "nav-email-health" },
 ];
 
 // Nav items that only exist in the commercial build (ee/). Filtered out when premium absent.
@@ -100,10 +100,10 @@ export default function Sidebar({ onCollapse }: { onCollapse?: (collapsed: boole
       onMouseLeave={() => setHovered(false)}
     >
       {/* Icon rail — always visible */}
-      <div className="w-13 shrink-0 bg-base-200 border-r border-base-300/40 flex flex-col h-full">
+      <div className="w-13 shrink-0 bg-base-200/95 backdrop-blur-xl border-r border-base-300/80 flex flex-col h-full shadow-[4px_0_24px_rgba(7,26,47,0.03)]">
         {/* Logo */}
-        <div className="shrink-0 h-13 flex items-center justify-center border-b border-base-300/40">
-          <Image src="/logo_linki.png" alt="Linki" width={22} height={22} className="rounded-md opacity-80" />
+        <div className="shrink-0 h-13 flex items-center justify-center border-b border-base-300/70">
+          <AwneyLogo compact className="scale-75" />
         </div>
 
         {/* Main nav icons */}
@@ -216,14 +216,15 @@ export default function Sidebar({ onCollapse }: { onCollapse?: (collapsed: boole
 
       {/* Hover label panel — overlay, slides in */}
       <div
-        className={`absolute left-13 top-0 h-full w-44 bg-base-200 border-r border-base-300/40 shadow-xl flex flex-col transition-all duration-150 ${
+        className={`absolute left-13 top-0 h-full w-52 bg-base-200/95 backdrop-blur-xl border-r border-base-300/80 shadow-[16px_0_40px_rgba(7,26,47,0.09)] flex flex-col transition-all duration-150 ${
           hovered ? "opacity-100 translate-x-0 pointer-events-auto" : "opacity-0 -translate-x-2 pointer-events-none"
         }`}
         style={{ borderRadius: "0 12px 12px 0" }}
       >
         {/* Logo area */}
-        <div className="shrink-0 h-13 flex items-center px-4 border-b border-base-300/40">
-          <span className="text-base-content font-semibold text-sm tracking-wide">Linki</span>
+        <div className="shrink-0 h-13 flex items-center px-4 border-b border-base-300/70">
+          <span className="font-heading text-base-content font-extrabold text-sm tracking-[-0.04em]">AWNEY</span>
+          <span className="ml-2 rounded-full bg-primary/10 px-2 py-0.5 text-[8px] font-bold tracking-[0.12em] text-primary">GROWTH OS</span>
         </div>
 
         {/* Nav labels */}
@@ -297,17 +298,17 @@ export default function Sidebar({ onCollapse }: { onCollapse?: (collapsed: boole
         </div>
 
         {/* Version + branding */}
-        <div className="px-4 py-3 border-t border-base-300/40">
+        <div className="px-4 py-3 border-t border-base-300/70">
           {currentVersion && (
             <p className="text-[10px] text-base-content/25 mb-0.5">v{currentVersion}</p>
           )}
           <a
-            href="https://opsily.com?utm_source=linki&utm_medium=app&utm_campaign=sidebar"
+            href="https://github.com/moaljumaa/linki"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[10px] text-base-content/25 hover:text-base-content/50 transition-colors"
           >
-            Built by opsily.com
+            Awney Digital · Powered by Linki
           </a>
         </div>
       </div>
